@@ -4,13 +4,18 @@ import MemoryGame from './MemoryGame.jsx';
 import "../styles/App.css";
 
 class App extends Component {
-  state = {  }
+  constructor(props) {
+    super(props);
+    this.state = {}
+  }
   render() { 
-    return ([
-      <h1>Hello World</h1>,
-      <Navbar />,
-      <MemoryGame />,
-    ]);
+    return (
+      <div className="container">
+        <h1>Hello World</h1>
+        <Navbar />
+        <MemoryGame />
+      </div>
+    );
   }
 }
 

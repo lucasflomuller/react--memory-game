@@ -4,10 +4,12 @@ import "../styles/MemoryGame.css";
 
 class MemoryGame extends Component {
   render() { 
-    return ([
-      <h3>This is the MEMORYGAME</h3>,
-      <Card />
-    ]);
+    return (
+      <div className="container">
+        <h3>This is the MEMORYGAME</h3>
+        <Card />
+      </div>
+    );
   }
 }
  
