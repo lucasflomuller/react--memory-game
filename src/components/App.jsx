@@ -7,9 +7,10 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      numCards: 20,
+      numCards: 4,
       colors: new Set(),
-      cards: []
+      cards: [],
+      curColor: ""
     };
   }
 
@@ -35,15 +36,16 @@ class App extends Component {
 
   generateCards = () => {
     this.generateColorSet();
-    let cards = [...this.state.colors].map((color, index) => {
+    let cards = [...this.state.colors].map(color => {
       return {
         color,
-        index,
         isShow: false
       };
     });
     cards = this.shuffleArray([...cards, ...cards]);
+    cards = cards.map(card => Object.assign({}, card));
     this.setState({ cards });
+    this.setState({ curColor: "" });
   };
 
   // https://bit.ly/2gMXijX <- picked from this stack question
@@ -67,6 +69,44 @@ class App extends Component {
     return array;
   };
 
+  // https://bit.ly/2NPsaKV
+  rgb2hex(rgb) {
+    rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+    function hex(x) {
+      return ("0" + parseInt(x).toString(16)).slice(-2);
+    }
+    return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
+  }
+
+  handleCardClick = e => {
+    const curColor = this.state.curColor;
+    const cards = [...this.state.cards].map(card => Object.assign({}, card));
+    const clickedCard = cards[Number(e.target.parentNode.id)];
+    // Showing card clicked
+    clickedCard.isShow = !clickedCard.isShow;
+    this.setState({ cards });
+    if (curColor === "") {
+      this.setState({ curColor: clickedCard.color });
+    } else {
+      setTimeout(() => {
+        if (clickedCard.color === curColor) {
+          this.setState({ curColor: "" });
+        } else {
+          cards
+            .filter(
+              card =>
+                card.color === curColor || card.color === clickedCard.color
+            )
+            .forEach(function(card) {
+              card.isShow = false;
+            });
+          this.setState({ cards });
+          this.setState({ curColor: "" });
+        }
+      }, 500);
+    }
+  };
+
   render() {
     return (
       <div className="container">
@@ -76,7 +116,10 @@ class App extends Component {
             Start Game
           </button>
         </div>
-        <MemoryGame cards={this.state.cards} />
+        <MemoryGame
+          handleCardClick={this.handleCardClick}
+          cards={this.state.cards}
+        />
       </div>
     );
   }

@@ -13,13 +13,4 @@
   position: absolute;
   width: 180px;
   height: 180px;
-  background-color: #ddd;
-  /* z-index: 1; */
-}
-
-.card-bg {
-  position: absolute;
-  width: 180px;
-  height: 180px;
-  /* z-index: 0; */
 }

@@ -6,7 +6,17 @@ class MemoryGame extends Component {
   render() { 
     return (
       <div className="game-container" id="game">
-        {this.props.cards.map((card, i) => <Card color={card.color} key={i} />)}
+        {this.props.cards.map((card, i) => (
+
+          <Card
+            handleCardClick={this.props.handleCardClick}
+            color={card.color}
+            key={i}
+            id={i}
+            isShow={card.isShow}
+          />
+          
+        ))}
       </div>
     );
   }
