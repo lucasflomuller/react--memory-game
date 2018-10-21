@@ -3,7 +3,14 @@ import "../styles/Card.css";
 
 class Card extends Component {
   render() { 
-    return ( <h5>This is the CARD</h5> );
+    return (
+      <div className="card-container">
+        <div className="card-overlay">
+        </div>
+        <div className="card-bg">
+        </div>
+      </div>
+    );
   }
 }
  
