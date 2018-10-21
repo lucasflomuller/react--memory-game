@@ -7,7 +7,7 @@ class Card extends Component {
       <div className="card-container">
         <div className="card-overlay">
         </div>
-        <div className="card-bg">
+        <div style={{backgroundColor: this.props.color}} className="card-bg">
         </div>
       </div>
     );

@@ -6,9 +6,6 @@ import "../styles/App.css";
 class App extends Component {
   constructor(props) {
     super(props);
-
-
-
     this.state = {
       numCards: 20,
       colors: new Set(),
@@ -24,7 +21,9 @@ class App extends Component {
   }
 
   generateColorSet = () => {
-    const colors = new Set(this.state.colors);
+    // Copiyng set
+    const colors = new Set();
+    // Generating colors and adding, using a while to prevent repetitive colors
     while (colors.size < this.state.numCards) {
       let color = this.generateHexColor();
       colors.add(color);
@@ -33,18 +32,32 @@ class App extends Component {
     return colors;
   }
 
+  generateCards = () => {
+    this.generateColorSet();
+    let cards = [...this.state.colors].map((color, index) => {
+      return ({
+        color,
+        index,
+        isShow: false
+      })
+    });
+    cards = [...cards, ...cards];
+    this.setState({ cards });
+  }
+
+  shuffleArray = () => "implement"
+
   render() { 
     return (
       <div className="container">
         <Navbar />
         <div className="game-menu">
-          <a 
-            href="#game"
+          <button 
             className="btn btn-start"
-            onClick={this.generateColorSet}
+            onClick={this.generateCards}
           >
             Start Game
-          </a>
+          </button>
         </div>
         <MemoryGame cards={this.state.cards} />
       </div>

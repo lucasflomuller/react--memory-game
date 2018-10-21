@@ -5,9 +5,8 @@ import "../styles/MemoryGame.css";
 class MemoryGame extends Component {
   render() { 
     return (
-      <div className="container" id="game">
-        <h3>This is the MEMORYGAME</h3>
-        {this.props.cards.map((card, i) => <Card key={i} />)}
+      <div className="game-container" id="game">
+        {this.props.cards.map((card, i) => <Card color={card.color} key={i} />)}
       </div>
     );
   }
